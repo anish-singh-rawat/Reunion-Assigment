@@ -26,7 +26,7 @@ export const registerUser = async (req, res) => {
 
     const newUser = new UserModel({ name, password : hashedPass, email });
     await newUser.save();
-    const token = jwt.sign({ email: newUser.email, id: newUser._id }, process.env.JWTKEY);
+    const token = jwt.sign({ email: newUser.email, userId: newUser._id }, process.env.JWTKEY);
     return res.status(200).json({ token, message: "user register successfully", success: true });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -54,7 +54,7 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Incorrect password" });
     }
 
-    const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWTKEY);
+    const token = jwt.sign({ email: user.email, userId: user._id }, process.env.JWTKEY);
 
     return res.status(200).json({
       token,

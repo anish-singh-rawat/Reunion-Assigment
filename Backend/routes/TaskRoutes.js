@@ -8,11 +8,18 @@ const authenticate = (req, res, next) => {
   if (!token) return res.status(401).json({ message: "Unauthorized" });
 
   jwt.verify(token, process.env.JWTKEY, (err, decoded) => {
-    if (err) return res.status(403).json({ message: "Forbidden" });
+    if (err) {
+      console.error("JWT Verification Error:", err);
+      return res.status(403).json({ message: "Forbidden" });
+    }
     req.userId = decoded.userId;
+    if (!req.userId) {
+      return res.status(400).json({ message: "Invalid token payload" });
+    }
     next();
   });
 };
+
 
 taskRoute.use(authenticate);
 
