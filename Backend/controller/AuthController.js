@@ -27,10 +27,8 @@ export const registerUser = async (req, res) => {
 
     const newUser = new UserModel({ name, password, email });
     await newUser.save();
-    return res.status(200).json({
-      message: "User registered successfully",
-      user: newUser,
-    });
+    const token = jwt.sign({ email: user.email,  username: user.username, id: user._id , profileImage : imagePath }, process.env.JWTKEY);
+    return res.status(200).json({ token, message: "user register successfully", success: true });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
