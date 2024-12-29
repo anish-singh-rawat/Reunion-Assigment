@@ -1,12 +1,6 @@
-const express = require("express");
-const {
-  createTask,
-  getTasks,
-  updateTask,
-  deleteTask,
-} = require("../controller/TaskController");
-const jwt = require("jsonwebtoken");
-
+import express from "express";
+import { createTask, getTasks, updateTask, deleteTask } from "../controller/TaskController.js"
+import jwt from "jsonwebtoken";
 const taskRoute = express.Router();
 
 const authenticate = (req, res, next) => {
@@ -27,4 +21,4 @@ taskRoute.get("/", getTasks);
 taskRoute.put("/:id", updateTask);
 taskRoute.delete("/:id", deleteTask);
 
-module.exports = taskRoute;
+export default taskRoute
