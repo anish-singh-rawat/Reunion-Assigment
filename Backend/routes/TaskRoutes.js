@@ -1,5 +1,5 @@
 import express from "express";
-import { createTask, getTasks, updateTask, deleteTask } from "../controller/TaskController.js"
+import { createTask, getTasks, updateTask, deleteTask, getAllTasks } from "../controller/TaskController.js"
 import jwt from "jsonwebtoken";
 const taskRoute = express.Router();
 
@@ -25,6 +25,7 @@ taskRoute.use(authenticate);
 
 taskRoute.post("/", createTask);
 taskRoute.get("/", getTasks);
+taskRoute.get("/getAllTasks/", getAllTasks);
 taskRoute.put("/:id", updateTask);
 taskRoute.delete("/:id", deleteTask);
 
