@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from 'dotenv'
 import { connectToMongoDB } from './config.js';
 import router from './routes/AuthRoutes.js';
+import taskRoute from './routes/TaskRoutes.js';
 
 dotenv.config()
 const app = express()
@@ -23,3 +24,5 @@ app.listen(process.env.PORT, () => {
 })
 
 app.use('/auth', router);
+app.use('/task-route', taskRoute);
+

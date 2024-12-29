@@ -4,28 +4,27 @@ const {
   getTasks,
   updateTask,
   deleteTask,
-} = require("../controllers/taskController");
+} = require("../controller/TaskController");
 const jwt = require("jsonwebtoken");
 
-const router = express.Router();
+const taskRoute = express.Router();
 
-// Middleware for authentication
 const authenticate = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "Unauthorized" });
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWTKEY, (err, decoded) => {
     if (err) return res.status(403).json({ message: "Forbidden" });
     req.userId = decoded.userId;
     next();
   });
 };
 
-router.use(authenticate);
+taskRoute.use(authenticate);
 
-router.post("/", createTask);
-router.get("/", getTasks);
-router.put("/:id", updateTask);
-router.delete("/:id", deleteTask);
+taskRoute.post("/", createTask);
+taskRoute.get("/", getTasks);
+taskRoute.put("/:id", updateTask);
+taskRoute.delete("/:id", deleteTask);
 
-module.exports = router;
+module.exports = taskRoute;
