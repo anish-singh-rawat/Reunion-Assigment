@@ -2,8 +2,8 @@ import Task from "../models/TaskModal.js";
 
 const createTask = async (req, res) => {
   try {
-    const { title, startTime, endTime, priority } = req.body;
-    const task = new Task({ user: req.userId, title, startTime, endTime, priority });
+    const {status, title, startTime, endTime, priority } = req.body;
+    const task = new Task({status, user: req.userId, title, startTime, endTime, priority });
     await task.save();
     res.status(201).json(task);
   } catch (error) {
