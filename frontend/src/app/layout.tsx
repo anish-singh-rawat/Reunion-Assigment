@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <body cz-shortcut-listen="true"
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col w-[100%] h-[100vh] overflow-auto`}
       >
         <NavBar/>
