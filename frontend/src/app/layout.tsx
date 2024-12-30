@@ -30,14 +30,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col w-full h-full overflow-auto`} cz-shortcut-listen="true"
+      <body data-new-gr-c-s-check-loaded="14.1215.0"
+        data-gr-ext-installed=""
+        cz-shortcut-listen="true"
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col w-full h-full overflow-auto`}
       >
+        <div>
+
         <NavBar />
+        </div>
         <div className="px-14 py-20 h-full">{children}</div>
 
         {/* Toast Container for notifications */}
-        <ToastContainer
+        <div>
+        <ToastContainer/>
+        </div>
           position="top-right"
           autoClose={5000}
           hideProgressBar={false}
@@ -48,7 +55,7 @@ export default function RootLayout({
           draggable
           pauseOnHover
           theme="light"
-        />
+        
       </body>
     </html>
   );
